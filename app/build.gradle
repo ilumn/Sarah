@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.0"
 
     defaultConfig {
-        applicationId "com.example.sarah001_dev2"
+        applicationId "com.example.sarah"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
