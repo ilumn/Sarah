@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
                      RequestBody formbody = new FormBody.Builder().add("payload", pyld).build();
 
-                     Request request = new Request.Builder().url("http://192.168.1.184:5000/post").post(formbody).build();
+                     Request request = new Request.Builder().url("http://0.0.0.0:5000/post").post(formbody).build();
                      okHttpClient.newCall(request).enqueue(new Callback() {
                          @Override
                          public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -134,6 +134,44 @@ public class MainActivity extends AppCompatActivity {
                 if (matches != null){
                     string = matches.get(0);
                     textView.setText(string);
+                    OkHttpClient okHttpClient = new OkHttpClient();
+
+                    RequestBody formbody = new FormBody.Builder().add("payload", string).build();
+
+                    Request request = new Request.Builder().url("http://0.0.0.0:5000/post").post(formbody).build();
+                    okHttpClient.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(MainActivity.this, "network unavailable", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onResponse(@NotNull Call call, @NotNull final Response response) throws IOException {
+                            final TextView textView = findViewById(R.id.output);
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        textView.setText(response.body().string());
+                                        TextView pyld3=findViewById(R.id.output);
+                                        String pyld4=pyld3.getText().toString();
+                                        textToSpeech.speak(pyld4, TextToSpeech.QUEUE_FLUSH, null, null);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+
+
+                        }
+                    });
+
                 }
             }
             @Override
@@ -148,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
     public void startButton(View view){
         textToSpeech.speak("How can I help?", TextToSpeech.QUEUE_FLUSH, null, null);
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

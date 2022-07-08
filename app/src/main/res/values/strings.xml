@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Sarah</string>
-    <string name="input">Input</string>
-    <string name="start">start</string>
-    <string name="send">Send</string>
-    <string name="response">Response</string>
+    <string name="input">Press Listen</string>
+    <string name="start">Listen</string>
+    <string name="send">Resend</string>
+    <string name="response">Listening...</string>
 </resources>
