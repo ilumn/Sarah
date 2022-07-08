@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Sarah 0.0.1-dev</string>
+    <string name="input">Input</string>
+    <string name="start">start</string>
+    <string name="send">Send</string>
+    <string name="response">Response</string>
+</resources>
